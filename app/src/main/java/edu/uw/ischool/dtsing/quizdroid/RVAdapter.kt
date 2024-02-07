@@ -10,7 +10,7 @@ class RVAdapter(private val data: List<String>, private var listener: MainActivi
     RecyclerView.Adapter<RVAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val textView: TextView = itemView.findViewById(R.id.quizText)
+        private val textView: TextView = itemView.findViewById(R.id.quizTopic)
 
         fun bindItem(item: String) {
             textView.text = item
@@ -22,7 +22,7 @@ class RVAdapter(private val data: List<String>, private var listener: MainActivi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.quiz_list_item, parent, false)
+            .inflate(R.layout.activity_topic_list_item, parent, false)
         return ViewHolder(view)
     }
 

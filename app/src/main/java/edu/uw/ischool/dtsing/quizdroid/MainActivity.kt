@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         val data = listOf(
             "Math",
             "Physics",
-            "Marvel Super Heroes",
+            "Biology",
             "Pokemon Types",
             "League of Legends"
         )
@@ -28,7 +28,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onItemClick(item: String) {
-        val intent = Intent(Intent.ACTION_VIEW)
+        val intent = Intent(this, TopicOverviewActivity::class.java).apply {
+            putExtra("SELECTED_TOPIC", item)
+        }
+        startActivity(intent)
         startActivity(intent)
 
         Toast.makeText(this, "You clicked on ${item}!", Toast.LENGTH_SHORT).show()
