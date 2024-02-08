@@ -16,7 +16,9 @@ class TopicOverviewActivity : AppCompatActivity() {
         val topicName = intent.getStringExtra("SELECTED_TOPIC")
 
         // Capture the layout's TextView and set the string as its text
-        findViewById<TextView>(R.id.topicTextView).apply {text = topicName}
+        findViewById<TextView>(R.id.topicTextView).apply {
+            text = topicName
+        }
 
         // Get reference to the next activity
         // Get reference to begin button

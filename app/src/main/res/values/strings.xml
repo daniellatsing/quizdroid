@@ -12,4 +12,11 @@
     <string name="option_4">Option 4</string>
     <string name="question">Question</string>
     <string name="submit">Submit</string>
+    <string name="you_answered">You Answered:</string>
+    <string name="answer">Answer</string>
+    <string name="correct_answer">Correct Answer:</string>
+    <string name="correct_answer_option">Correct Answer Option</string>
+    <string name="you_have_x_out_of_x_correct">You have x out of x correct.</string>
+    <string name="next">Next</string>
+    <string name="finish">Finish</string>
 </resources>
