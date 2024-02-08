@@ -15,8 +15,10 @@
     <string name="you_answered">You Answered:</string>
     <string name="answer">Answer</string>
     <string name="correct_answer">Correct Answer:</string>
-    <string name="correct_answer_option">Correct Answer Option</string>
-    <string name="you_have_x_out_of_x_correct">You have x out of x correct.</string>
+    <string name="correct_answer_option">Option 1</string>
+    <string name="quiz_score">You have %1$d out of 5 correct!</string>
+    <string name="you_have_x_out_of_x_correct">You have %1$d out of 5 correct!</string>
     <string name="next">Next</string>
     <string name="finish">Finish</string>
+    <string name="back">Back</string>
 </resources>

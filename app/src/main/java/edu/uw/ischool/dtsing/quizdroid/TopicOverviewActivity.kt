@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class TopicOverviewActivity : AppCompatActivity() {
+    private lateinit var backBtn: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_topic_overview)
@@ -19,6 +20,8 @@ class TopicOverviewActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.topicTextView).apply {
             text = topicName
         }
+
+        backBtn = findViewById(R.id.backBtn)
 
         // Get reference to the next activity
         // Get reference to begin button
@@ -33,7 +36,10 @@ class TopicOverviewActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
+        backBtn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
     
 }

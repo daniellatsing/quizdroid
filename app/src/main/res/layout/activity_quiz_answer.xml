@@ -10,8 +10,8 @@
         android:id="@+id/layoutAnswerKey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvQuizScore"
+        android:layout_marginTop="80sp"
+        app:layout_constraintBottom_toTopOf="@+id/quizScore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
@@ -47,7 +47,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/tvQuizScore"
+        android:id="@+id/quizScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="96dp"

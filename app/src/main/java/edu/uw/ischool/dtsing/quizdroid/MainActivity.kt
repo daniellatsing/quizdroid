@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
             "Physics",
             "Biology",
             "Pokemon Types",
-            "League of Legends"
+            "League of Legends",
         )
 
         rvList.layoutManager = LinearLayoutManager(this)

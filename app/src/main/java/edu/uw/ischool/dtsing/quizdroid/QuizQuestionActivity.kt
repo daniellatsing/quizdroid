@@ -6,9 +6,11 @@ import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class QuizQuestionActivity : AppCompatActivity() {
+    private lateinit var backBtn: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_question)
@@ -22,6 +24,8 @@ class QuizQuestionActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.questionTextView).apply {
             text = numQuestion.toString()
         }
+
+        backBtn = findViewById(R.id.backBtn)
 
         // Get reference to radio group options
         val radioGroupAnswers = findViewById<RadioGroup>(R.id.radioGroup)
@@ -45,6 +49,19 @@ class QuizQuestionActivity : AppCompatActivity() {
             }
 
             startActivity(intent)
+        }
+
+        backBtn.setOnClickListener {
+            if (numQuestion > 1) {
+                val intent = Intent(this, QuizQuestionActivity::class.java).apply {
+                    putExtra("NUM_QUESTION", numQuestion - 1)
+                    putExtra("NUM_CORRECT", numCorrect) // Pass numCorrect to the next question
+                }
+                startActivity(intent)
+            } else {
+                // Let the user know they cannot go back further
+                Toast.makeText(this, "You're already on the first question.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
