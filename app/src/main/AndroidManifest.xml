@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TopicOverviewActivity"
+            android:name=".TopicOverviewFragment"
             android:label="@string/app_name"
             android:theme="@style/Base.Theme.QuizDroid"
             android:launchMode="singleTop"
@@ -33,10 +33,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".QuizQuestionActivity"
+            android:name=".QuizQuestionFragment"
             android:theme="@style/Base.Theme.QuizDroid"/>
         <activity
-            android:name=".QuizAnswerActivity"
+            android:name=".QuizAnswerFragment"
             android:theme="@style/Base.Theme.QuizDroid"/>
     </application>
 </manifest>

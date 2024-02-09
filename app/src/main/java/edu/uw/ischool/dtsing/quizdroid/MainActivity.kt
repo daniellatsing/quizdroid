@@ -1,43 +1,49 @@
 package edu.uw.ischool.dtsing.quizdroid
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.core.os.bundleOf
 
 class MainActivity : AppCompatActivity() {
-    // Setup variables for later initialization
-    private lateinit var rvList: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Reference RecyclerView
-        rvList = findViewById(R.id.rv_list)
-
-        // Hard-coded list of sample topic names
-        val data = listOf(
-            "Math",
-            "Physics",
-            "Biology",
-            "Pokemon Types",
-            "League of Legends",
-        )
-
-        rvList.layoutManager = LinearLayoutManager(this)
-        rvList.adapter = RVAdapter(data, this)
-    }
-
-    fun onItemClick(item: String) {
-        // Add clicked topic name as extra
-        val intent = Intent(this, TopicOverviewActivity::class.java).apply {
-            putExtra("SELECTED_TOPIC", item)
+        // Load the initial fragment
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, MainFragment())
+                .commit()
         }
-        startActivity(intent)
-
-        Toast.makeText(this, "You clicked on ${item}!", Toast.LENGTH_SHORT).show()
     }
 
+    // Function to navigate to QuizQuestionFragment
+    fun navToQuizQuestion(numQuestion: Int, numCorrect: Int) {
+        val fragment = QuizQuestionFragment().apply {
+            arguments = bundleOf("NUM_QUESTION" to numQuestion, "NUM_CORRECT" to numCorrect)
+        }
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    // Function to navigate to QuizAnswerFragment
+    fun navToQuizAnswer(userAnswer:String, numQuestion: Int, numCorrect: Int) {
+        val fragment = QuizAnswerFragment().apply {
+            arguments = bundleOf("USER_ANSWER" to userAnswer, "NUM_QUESTION" to numQuestion, "NUM_CORRECT" to numCorrect)
+        }
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    // Function to navigate to TopicOverviewFragment
+    fun navToTopicOverview(topic: String) {
+        val fragment = TopicOverviewFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
+    }
 }
