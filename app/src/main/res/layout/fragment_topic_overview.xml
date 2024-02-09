@@ -7,17 +7,17 @@
     android:orientation="vertical"
     tools:context=".TopicOverviewFragment">
 
-<TextView
-    android:id="@+id/topicTextView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="96dp"
-    android:text="@string/topic"
-    android:textSize="34sp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.498"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/topicTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/topic"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@id/topicDescriptionTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 <TextView
     android:id="@+id/questionCountTextView"
@@ -34,7 +34,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/lorem_ipsum_dolor_sit_amet"
-    app:layout_constraintBottom_toTopOf="@+id/beginQuizBtn"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/topicTextView" />
@@ -47,18 +47,18 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/topicTextView" />
+    app:layout_constraintTop_toBottomOf="@+id/topicDescriptionTextView" />
 
-<Button
-    android:id="@+id/backBtn"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/back"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@+id/topicTextView"
-    app:layout_constraintHorizontal_bias="0.402"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.042" />
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/topicTextView"
+        app:layout_constraintHorizontal_bias="0.426"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.073" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

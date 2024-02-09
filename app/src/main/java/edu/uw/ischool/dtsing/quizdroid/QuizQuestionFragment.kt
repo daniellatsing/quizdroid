@@ -9,12 +9,14 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 
 class QuizQuestionFragment : Fragment() {
     private lateinit var submitBtn: Button
     private lateinit var backBtn: Button
     private lateinit var radioGroupAnswers: RadioGroup
+    private lateinit var topic: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View? {
         // Inflate the layout for this fragment
@@ -23,6 +25,23 @@ class QuizQuestionFragment : Fragment() {
         // Get the question number and number of correct answers from arguments
         val numQuestion = requireArguments().getInt("NUM_QUESTION", 1)
         val numCorrect = requireArguments().getInt("NUM_CORRECT", 0)
+        topic = requireArguments().getString("TOPIC", "")
+
+        // Define the onBackPressedCallback outside of the lambda
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Check if it's the first question page
+                if (numQuestion == 1) {
+                    // Navigate back to the topic list page
+                    (requireActivity() as MainActivity).navToTopicOverview(topic)
+                } else {
+                    // Navigate to the previous question fragment
+                    (requireActivity() as MainActivity).navToQuizQuestion(numQuestion - 1, numCorrect, topic)
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
+
 
         // Capture the layout's TextView and set the question number as its text
         view.findViewById<TextView>(R.id.questionTextView).text = numQuestion.toString()
@@ -59,7 +78,7 @@ class QuizQuestionFragment : Fragment() {
         backBtn.setOnClickListener {
             if (numQuestion > 1) {
                 // Navigate to the previous question fragment
-                (requireActivity() as MainActivity).navToQuizQuestion(numQuestion - 1, numCorrect)
+                (requireActivity() as MainActivity).navToQuizQuestion(numQuestion - 1, numCorrect, topic)
             } else {
                 // Let the user know they cannot go back further
                 Toast.makeText(requireContext(), "There are no more previous questions.", Toast.LENGTH_SHORT).show()

@@ -18,9 +18,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Function to navigate to QuizQuestionFragment
-    fun navToQuizQuestion(numQuestion: Int, numCorrect: Int) {
+    fun navToQuizQuestion(numQuestion: Int, numCorrect: Int, topic:String) {
         val fragment = QuizQuestionFragment().apply {
-            arguments = bundleOf("NUM_QUESTION" to numQuestion, "NUM_CORRECT" to numCorrect)
+            arguments = bundleOf(
+                "NUM_QUESTION" to numQuestion,
+                "NUM_CORRECT" to numCorrect,
+                "TOPIC" to topic)
         }
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
@@ -31,7 +34,11 @@ class MainActivity : AppCompatActivity() {
     // Function to navigate to QuizAnswerFragment
     fun navToQuizAnswer(userAnswer:String, numQuestion: Int, numCorrect: Int) {
         val fragment = QuizAnswerFragment().apply {
-            arguments = bundleOf("USER_ANSWER" to userAnswer, "NUM_QUESTION" to numQuestion, "NUM_CORRECT" to numCorrect)
+            arguments = bundleOf(
+                "USER_ANSWER" to userAnswer,
+                "NUM_QUESTION" to numQuestion,
+                "NUM_CORRECT" to numCorrect
+            )
         }
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
@@ -41,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     // Function to navigate to TopicOverviewFragment
     fun navToTopicOverview(topic: String) {
-        val fragment = TopicOverviewFragment()
+        val fragment = TopicOverviewFragment.newInstance(topic)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()

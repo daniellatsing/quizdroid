@@ -1,5 +1,6 @@
 package edu.uw.ischool.dtsing.quizdroid
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,7 @@ class QuizAnswerFragment : Fragment() {
         var numCorrect = requireArguments().getInt("NUM_CORRECT", 0)
         val userAnswer = requireArguments().getString("USER_ANSWER") ?: ""
 
-        // Differentiate betwen next and finished to decide what button will show up
+        // Differentiate between next and finished to decide what button will show up
         val quizStatus = if (numQuestion < 5) {
             "Next"
         } else {
@@ -64,11 +65,10 @@ class QuizAnswerFragment : Fragment() {
                 .commit()
         }
 
-
-        // TODO: Fix going back to Main Screen once finishing quiz
         finishBtn.setOnClickListener {
-            // Go back to MainActivity
-            requireActivity().finish()
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
         }
 
         return view
