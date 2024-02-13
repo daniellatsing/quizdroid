@@ -27,7 +27,7 @@ An application that will allow users to take multiple-choice quizzes
 
 ### Developer Tasks
 - Create a class called QuizApp extending android.app.Application and make sure it is referenced from the app manifest; override the onCreate() method to emit a message to the diagnostic log to ensure it is being loaded and run
-  - Use the "Repository" pattern to create a TopicRepository interface; create one implementation that simply stores elements in memory from a hard-coded list initialized on startup.
+- Use the "Repository" pattern to create a TopicRepository interface; create one implementation that simply stores elements in memory from a hard-coded list initialized on startup.
   - Create domain objects for Topic and Question
     - a Question is question text, four answers, and an integer saying which of the four answers is correct
     - a Topic is a title, short description, long description, and a collection of Question objects
