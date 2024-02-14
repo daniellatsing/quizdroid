@@ -1,6 +1,7 @@
 package edu.uw.ischool.dtsing.quizdroid
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,16 +17,23 @@ class QuizQuestionFragment : Fragment() {
     private lateinit var submitBtn: Button
     private lateinit var backBtn: Button
     private lateinit var radioGroupAnswers: RadioGroup
-    private lateinit var topic: String
+    private lateinit var currentQuestion: Question
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_quiz_question, container, false)
 
-        // Get the question number and number of correct answers from arguments
+        // Get the question number, number of correct answers, and description from arguments
         val numQuestion = requireArguments().getInt("NUM_QUESTION", 1)
         val numCorrect = requireArguments().getInt("NUM_CORRECT", 0)
-        topic = requireArguments().getString("TOPIC", "")
+        val topic = requireArguments().getString("TOPIC", "")
+
+        val topicRepository = (requireActivity().application as QuizApp).getRepository()
+        val currentTopic = topicRepository.getTopic(Topic(topic, "", "", emptyList())) ?: return null
+        Log.d("QuizQuestionFragment", "Current Topic: $currentTopic")
+        Log.d("QuizQuestionFragment", "Questions in Current Topic: ${currentTopic.questionsList}")
+
+        currentQuestion = currentTopic.questionsList.find { it.questionNum == numQuestion } ?: return null
 
         // Define the onBackPressedCallback outside of the lambda
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
@@ -33,7 +41,7 @@ class QuizQuestionFragment : Fragment() {
                 // Check if it's the first question page
                 if (numQuestion == 1) {
                     // Navigate back to the topic list page
-                    (requireActivity() as MainActivity).navToTopicOverview(topic)
+                    (requireActivity() as MainActivity).navToTopicOverview(topic, currentTopic.shortDescription)
                 } else {
                     // Navigate to the previous question fragment
                     (requireActivity() as MainActivity).navToQuizQuestion(numQuestion - 1, numCorrect, topic)
@@ -44,7 +52,7 @@ class QuizQuestionFragment : Fragment() {
 
 
         // Capture the layout's TextView and set the question number as its text
-        view.findViewById<TextView>(R.id.questionTextView).text = numQuestion.toString()
+        view.findViewById<TextView>(R.id.questionTextView).text = currentQuestion.questionText
 
         // Find the back button in the layout
         backBtn = view.findViewById(R.id.backBtn)

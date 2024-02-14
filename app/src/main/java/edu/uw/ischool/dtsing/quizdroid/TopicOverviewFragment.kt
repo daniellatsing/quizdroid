@@ -2,6 +2,7 @@ package edu.uw.ischool.dtsing.quizdroid
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +13,13 @@ import androidx.fragment.app.Fragment
 class TopicOverviewFragment : Fragment() {
     companion object {
         private const val ARG_TOPIC = "topic"
+        private const val ARG_DESCRIPTION = "description"
 
-        fun newInstance(topic: String): TopicOverviewFragment {
+        fun newInstance(topic: String, longDescription: String): TopicOverviewFragment {
             val fragment = TopicOverviewFragment()
             val args = Bundle()
             args.putString(ARG_TOPIC, topic)
+            args.putString(ARG_DESCRIPTION, longDescription)
             fragment.arguments = args
             return fragment
         }
@@ -28,10 +31,15 @@ class TopicOverviewFragment : Fragment() {
 
         // Retrieve topic title from arguments
         val topic = arguments?.getString(ARG_TOPIC, "") ?: ""
+        val description = arguments?.getString(ARG_DESCRIPTION, "") ?: ""
 
-        // Display the topic title
+        // Display the topic title and description
         val topicTextView = view.findViewById<TextView>(R.id.topicTextView)
         topicTextView.text = topic
+
+        val descTextView = view.findViewById<TextView>(R.id.topicDescriptionTextView)
+        descTextView.text = description
+
 
         // Reference button
         val beginQuizBtn = view.findViewById<Button>(R.id.beginQuizBtn)
@@ -41,12 +49,14 @@ class TopicOverviewFragment : Fragment() {
         beginQuizBtn.setOnClickListener{
             // When the button is clicked, navigate to QuizQuestionFragment
             (requireActivity() as MainActivity).navToQuizQuestion(1, 0, topic)
+            Log.i("Button message", "Begin button pressed")
         }
 
         backBtn.setOnClickListener{
             // When the button is clicked, navigate to list of topics
             val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
+            Log.i("Button message", "Back button pressed")
         }
 
         return view

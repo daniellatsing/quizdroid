@@ -9,9 +9,10 @@ import androidx.core.os.bundleOf
 interface TopicRepositoryDb {
     fun getAllTopics(): List<Topic>
     fun getTopic(topic: Topic): Topic?
+    fun getQuestionsForTopic(topic: Topic): List<Question>
 }
 
-class TopicRepository(quizApp: QuizApp) : TopicRepositoryDb {
+class TopicRepository : TopicRepositoryDb {
     // Hard-coded list
     private val topics = listOf(
         // Math
@@ -23,35 +24,50 @@ class TopicRepository(quizApp: QuizApp) : TopicRepositoryDb {
                     "quantities and their changes.",
             listOf(
                 Question(
+                    1,
                     "What is 2 + 2?",
-                    listOf("3", "4", "5", "6"),
+                    "3",
+                    "4",
+                    "5",
+                    "6",
                     2
                 ),
                 Question (
-                    "Bill is ten yeras older than his sister. If Bill was twenty-five" +
+                    2,
+                    "Bill is ten years older than his sister. If Bill was twenty-five" +
                             " years of age in 1983, in what year could he have been born?",
-                    listOf("1948", "1953", "1958", "1963"),
+                    "1948",
+                    "1953",
+                    "1958",
+                    "1963",
                     3
                 ),
                 Question(
+                    3,
                     "What is the approximate value of the square root of 1596?",
-                    listOf("10", "20", "30", "40"),
+                    "10",
+                    "20",
+                    "30",
+                    "40",
                     4
                 ),
                 Question(
+                    4,
                     "If x is a positive integer in the equation 12x = q, then q must be..?",
-                    listOf("a positive even integer", "a negative even integer", "zero",
-                        "a positive odd integer", "a negative odd integer"),
+                    "a positive even integer",
+                    "a negative even integer",
+                    "a negative odd integer",
+                    "a positive odd integer",
                     1
                 ),
                 Question(
+                    5,
                     "What does Lagrange's theorem state?",
-                    listOf(
-                        "Every group is cyclic",
-                        "The order of a subgroup must divide the order of the group",
-                        "The order of a group must divide the order of its subgroup",
-                        "The order of a subgroup is always greater than the order of the group"
-                    ),
+                    "Every group is cyclic",
+                    "The order of a subgroup must divide the order of the group",
+                    "The order of a group must divide the order of its subgroup",
+                    "The order of a subgroup is always greater than the order of the group"
+                    ,
                     2
                 )
             )
@@ -64,35 +80,50 @@ class TopicRepository(quizApp: QuizApp) : TopicRepositoryDb {
                     "governing the behavior of matter, energy, space, and time",
             listOf(
                 Question(
+                    1,
                     "What is the SI unit of force?",
-                    listOf("Joule", "Newton", "Watt", "Kilogram"),
+                    "Joule",
+                    "Newton",
+                    "Watt",
+                    "Kilogram",
                     2
                 ),
                 Question(
+                    2,
                     "Which of the following is a scalar quantity?",
-                    listOf("Velocity", "Acceleration", "Force", "Distance"),
+                    "Velocity",
+                    "Acceleration",
+                    "Force",
+                    "Distance",
                     4
                 ),
                 Question(
+                    3,
                     "What is the law stating that an object at rest will remain at rest," +
-                            "and an object in omtion will remain in motion with constant velocity" +
+                            "and an object in motion will remain in motion with constant velocity" +
                             "unless acted upon by a net external force?",
-                    listOf(
-                        "Newton's First Law of Motion",
-                        "Newton's Second Law of Motion",
-                        "Newton's Third Law of Motion",
-                        "Law of Universal Gravitation"
-                    ),
+                    "Newton's First Law of Motion",
+                    "Newton's Second Law of Motion",
+                    "Newton's Third Law of Motion",
+                    "Law of Universal Gravitation",
                     1
                 ),
                 Question(
+                    4,
                    "What type of energy is associated with the motion of an object?",
-                    listOf("Potential energy", "Kinetic energy", "Thermal energy", "Chemical energy"),
+                    "Potential energy",
+                    "Kinetic energy",
+                    "Thermal energy",
+                    "Chemical energy",
                     2
                 ),
                 Question(
+                    5,
                     "What is the SI unit of Power?",
-                    listOf("Watt", "Joule", "Newton", "Kilogram"),
+                    "Watt",
+                    "Joule",
+                    "Newton",
+                    "Kilogram",
                     1
                 )
             )
@@ -100,41 +131,52 @@ class TopicRepository(quizApp: QuizApp) : TopicRepositoryDb {
         // Biology
         Topic(
             "Biology",
-            "",
-            "",
+            "A branch of science study of life and living organisms.",
+            "The scientific study of life and living organisms, including their " +
+                    "structure, function, growth, evolution, distribution, and taxonomy.",
             listOf(
                 Question(
+                    1,
                     "What is the basic unit of life?",
-                    listOf("Cell", "Atom", "Molecule", "Tissue"),
+                    "Cell",
+                    "Atom",
+                    "Molecule",
+                    "Tissue",
                     1
                 ),
                 Question(
+                    2,
                     "Which organelle is known as the powerhouse of the cell?",
-                    listOf("Nucleus", "Golgi Apparatus", "Mitochondrion", "Endoplasmic reticulum"),
-                    3
-                ),
-                Question("During glycogenolysis, glycogen is broken down into:",
-                    listOf(
-                        "Glucose-1-phosphate and ATP",
-                        "Glucose-6-phosphate and NADH",
-                        "Glucose-6-phosphate and ATP",
-                        "Glucose-1-phosphate and NADH"
-                    ),
+                    "Nucleus",
+                    "Golgi Apparatus",
+                    "Mitochondrion",
+                    "Endoplasmic reticulum",
                     3
                 ),
                 Question(
+                    3,"During glycogenolysis, glycogen is broken down into:",
+                    "Glucose-1-phosphate and ATP",
+                    "Glucose-6-phosphate and NADH",
+                    "Glucose-6-phosphate and ATP",
+                    "Glucose-1-phosphate and NADH",
+                    3
+                ),
+                Question(
+                    4,
                     "What is the process by which green plants make their food?",
-                    listOf("Respiration", "Photosynthesis", "Transpiration", "Fermentation"),
+                    "Respiration",
+                    "Photosynthesis",
+                    "Transpiration",
+                    "Fermentation",
                     2
                 ),
                 Question(
+                    5,
                     "Which of the following is NOT a function of the cell membrane?",
-                    listOf(
-                        "Regulating the passage of substances into and out of the cell",
-                        "Providing structural support to the cell",
-                        "Facilitating cell communication",
-                        "Synthesizing proteins"
-                    ),
+                    "Regulating the passage of substances into and out of the cell",
+                    "Providing structural support to the cell",
+                    "Facilitating cell communication",
+                    "Synthesizing proteins",
                     4
                 )
             )
@@ -142,33 +184,41 @@ class TopicRepository(quizApp: QuizApp) : TopicRepositoryDb {
         // Pokemon
         Topic(
             "Pokemon",
-            "",
-            "",
+            "A popular franchise that originated from a series of video games " +
+                    "developed by Nintendo.",
+            "Pokemon is a multimedia franchise centred around fictional creatures" +
+                    "called Pokemon. Trainers are able to catch and train these creatures for sport," +
+                    "or keep them as pals.",
             listOf(
                 Question(
+                    1,
                     "Which Pokemon type is super effective against Grass-type Pokemon?",
-                    listOf("Fire", "Water", "Electric", "Flying"),
+                    "Fire", "Water", "Electric", "Flying",
                     1
                 ),
                 Question(
+                    2,
                     "What is the evolved form of Pikachu?",
-                    listOf("Raichu", "Pichu", "Jolteon", "Electabuzz"),
+                    "Raichu", "Pichu", "Jolteon", "Electabuzz",
                     1
                 ),
                 Question(
+                    3,
                     "Which Pokemon is known as the 'Seed Pokemon'?",
-                    listOf("Bulbasaur", "Chikorita", "Celebi", "Treecko"),
+                    "Bulbasaur", "Chikorita", "Celebi", "Treecko",
                     1
                 ),
                 Question(
+                    4,
                     "What type of Pokemon is Charizard?",
-                    listOf("Fire/Flying", "Fire/Dragon", "Fire", "Dragon/Flying"),
+                    "Fire/Flying", "Fire/Dragon", "Fire", "Dragon/Flying",
                     1
                 ),
                 Question(
+                    5,
                     "Which Pokemon is known as the 'Water-type starter Pokemon' in the" +
                             "Kanto region?",
-                    listOf("Squirtle", "Totodile", "Mudkip", "Piplup"),
+                    "Squirtle", "Totodile", "Mudkip", "Piplup",
                     1
                 ),
             )
@@ -176,36 +226,58 @@ class TopicRepository(quizApp: QuizApp) : TopicRepositoryDb {
         // League of Legends
         Topic(
             "League of Legends",
-            "",
-            "",
+            "A popular MOBA developed by Riot Games.",
+            "League of Legends (LoL) is a multiplayer online battle arena (MOBA)" +
+                    "game where players control powerful champions with unique abilities, working" +
+                    "together in teams to destroy the enemy's base while defending their own.",
             listOf(
                 Question(
+                    1,
                     "What is the name of the main map used in most League of " +
                             "Legends matches?",
-                    listOf("Summoner's Valley", "Rift Valley", "Summoner's Rift", "The Howling Abyss"),
+                    "Summoner's Valley",
+                    "Rift Valley",
+                    "Summoner's Rift",
+                    "The Howling Abyss",
                     3
                 ),
                 Question(
+                    2,
                     "Which of the following is not a primary resource used by champions" +
                             "in League of Legends?",
-                    listOf("Mana", "Energy", "Fury", "Health"),
+                    "Mana",
+                    "Energy",
+                    "Fury",
+                    "Health",
                     4
                 ),
                 Question(
+                    3,
                     "Who is the ruler of Demacia in the lore of League of Legends?",
-                    listOf("Jarvan III", "Garen Crownguard", "Luxanna Crownguard", "Sylas"),
+                    "Jarvan III",
+                    "Garen Crownguard",
+                    "Luxanna Crownguard",
+                    "Sylas",
                     1
                 ),
                 Question(
+                    4,
                     "Which champon was a member of the Kinkou Order before breaking" +
                             "away to pursue their own path?",
-                    listOf("Akali", "Shen", "Zed", "Kennen"),
+                    "Akali",
+                    "Shen",
+                    "Zed",
+                    "Kennen",
                     3
                 ),
                 Question(
+                    5,
                     "Which champion is associated with the Shadow Isles and seeks to" +
                             "undo the curse that afflicts their homeland?",
-                    listOf("Thresh", "Kalista", "Yorick", "Maokai"),
+                    "Thresh",
+                    "Kalista",
+                    "Yorick",
+                    "Maokai",
                     3
                 ),
             )
@@ -224,6 +296,11 @@ class TopicRepository(quizApp: QuizApp) : TopicRepositoryDb {
         }
         return null
     }
+
+    override fun getQuestionsForTopic(topic: Topic): List<Question> {
+        val foundTopic = topics.find { it == topic }
+        return foundTopic?.questionsList ?: emptyList()
+    }
 }
 
 data class Topic(
@@ -234,10 +311,16 @@ data class Topic(
 )
 
 data class Question(
+    val num : Int,
     val questionText: String,
-    val answers: List<String>,
+    val a1: String,
+    val a2: String,
+    val a3: String,
+    val a4: String,
     val correctAnswer: Int
-)
+) {
+    val questionNum = num
+}
 
 class QuizApp : Application() {
     private lateinit var topicRepository: TopicRepositoryDb
@@ -246,7 +329,7 @@ class QuizApp : Application() {
         Log.d("QuizApp", "QuizApp was created")
 
         // Initialize repository
-        topicRepository = TopicRepository(this)
+        topicRepository = TopicRepository()
     }
 
     // Method to retrieve the TopicRepository instance
@@ -264,6 +347,9 @@ class MainActivity : AppCompatActivity() {
         val quizApp = (application as QuizApp)
         val repo = quizApp.getRepository()
         val topics = repo.getAllTopics()
+        val topic = repo.getTopic(topics.first())
+        val shortDesc = topic?.shortDescription.toString()
+        val longDesc = topic?.longDescription.toString()
 
         // Load the initial fragment
         if (savedInstanceState == null) {
@@ -304,8 +390,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Function to navigate to TopicOverviewFragment
-    fun navToTopicOverview(topic: String) {
-        val fragment = TopicOverviewFragment.newInstance(topic)
+    fun navToTopicOverview(topic: String, longDescription: String) {
+        val fragment = TopicOverviewFragment.newInstance(topic, longDescription)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()

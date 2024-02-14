@@ -1,6 +1,5 @@
 package edu.uw.ischool.dtsing.quizdroid
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +20,11 @@ class QuizAnswerFragment : Fragment() {
         val numQuestion = requireArguments().getInt("NUM_QUESTION", 1)
         var numCorrect = requireArguments().getInt("NUM_CORRECT", 0)
         val userAnswer = requireArguments().getString("USER_ANSWER") ?: ""
+        val topic = requireArguments().getString("TOPIC") ?: ""
+
+        val topicRepository = (requireActivity().application as QuizApp).getRepository()
+        val currentTopic = topicRepository.getTopic(Topic("topic", "", "", emptyList())) ?: return null
+        currentTopic.questionsList.find { it.questionNum == numQuestion }?.correctAnswer ?: -1
 
         // Differentiate between next and finished to decide what button will show up
         val quizStatus = if (numQuestion < 5) {
@@ -33,8 +37,7 @@ class QuizAnswerFragment : Fragment() {
         view.findViewById<TextView>(R.id.userAnswer).text = userAnswer
 
         // Compare user answer to correct answer
-        val correctAnswer = "Option 1" // Assuming the correct answer is always "Option 1"
-        if (userAnswer == correctAnswer) {
+        if (userAnswer == currentTopic.questionsList.find { it.questionNum == numQuestion }?.correctAnswer.toString()) {
             numCorrect++
         }
 
@@ -58,6 +61,7 @@ class QuizAnswerFragment : Fragment() {
                 arguments = Bundle().apply {
                     putInt("NUM_QUESTION", numQuestion + 1)
                     putInt("NUM_CORRECT", numCorrect)
+                    putString("TOPIC", topic)
                 }
             }
             requireActivity().supportFragmentManager.beginTransaction()
@@ -66,9 +70,10 @@ class QuizAnswerFragment : Fragment() {
         }
 
         finishBtn.setOnClickListener {
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            val fragment = MainFragment() // Navigate back to the main fragment
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit()
         }
 
         return view

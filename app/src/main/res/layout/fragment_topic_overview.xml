@@ -11,7 +11,9 @@
         android:id="@+id/topicTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxWidth="200dp"
         android:text="@string/topic"
+        android:textAlignment="center"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@id/topicDescriptionTextView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<TextView
+    <TextView
     android:id="@+id/questionCountTextView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -29,25 +31,26 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/topicTextView" />
 
-<TextView
-    android:id="@+id/topicDescriptionTextView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/lorem_ipsum_dolor_sit_amet"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/topicTextView" />
+    <TextView
+        android:id="@+id/topicDescriptionTextView"
+        android:layout_width="315dp"
+        android:layout_height="158dp"
+        android:text="@string/lorem_ipsum_dolor_sit_amet"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topicTextView" />
 
-<Button
-    android:id="@+id/beginQuizBtn"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/begin"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/topicDescriptionTextView" />
+    <Button
+        android:id="@+id/beginQuizBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/begin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topicDescriptionTextView" />
 
     <Button
         android:id="@+id/backBtn"

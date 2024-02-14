@@ -1,17 +1,18 @@
 package edu.uw.ischool.dtsing.quizdroid
 
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ListView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+
 
 class MainFragment : Fragment() {
 
-    private lateinit var rvList: RecyclerView
-
+    private lateinit var shortDescriptionTextView: TextView
+    private lateinit var listView: ListView
     private lateinit var topics: List<Topic>
 
     companion object {
@@ -24,24 +25,26 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: android.view.ViewGroup?,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         super.onCreate(savedInstanceState)
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
-        // Reference RecyclerView
-        rvList = view.findViewById(R.id.rv_list)
-        rvList.layoutManager = LinearLayoutManager(requireContext())
+        // Reference ListView
+        listView = view.findViewById(R.id.listView)
 
-        val adapter = RVAdapter(topics) { topic ->
-            // Handle item click, navigate to TopicOverviewFragment with selected topic
-            (requireActivity() as MainActivity).navToTopicOverview(topic)
+        shortDescriptionTextView = view.findViewById(R.id.subtitleTextView)
+
+        val adapter = TopicListAdapter(requireContext(), topics) { topicTitle, _ ->
+            val selectedTopic = topics.find { it.title == topicTitle }
+            selectedTopic?.let {
+                (requireActivity() as MainActivity).navToTopicOverview(it.title, it.longDescription)
+            }
         }
-        rvList.adapter = adapter
+        listView.adapter = adapter
 
         return view
     }
-
 }
