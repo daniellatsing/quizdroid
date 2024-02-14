@@ -3,8 +3,6 @@ package edu.uw.ischool.dtsing.quizdroid
 import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import android.util.Log
 import androidx.core.os.bundleOf
 
@@ -13,7 +11,7 @@ interface TopicRepositoryDb {
     fun getTopic(topic: Topic): Topic?
 }
 
-class TopicRepository : TopicRepositoryDb {
+class TopicRepository(quizApp: QuizApp) : TopicRepositoryDb {
     // Hard-coded list
     private val topics = listOf(
         // Math
@@ -248,7 +246,7 @@ class QuizApp : Application() {
         Log.d("QuizApp", "QuizApp was created")
 
         // Initialize repository
-        topicRepository = TopicRepository()
+        topicRepository = TopicRepository(this)
     }
 
     // Method to retrieve the TopicRepository instance
