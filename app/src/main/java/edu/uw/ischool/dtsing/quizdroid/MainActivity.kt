@@ -361,12 +361,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Function to navigate to QuizQuestionFragment
-    fun navToQuizQuestion(numQuestion: Int, numCorrect: Int, topic:String) {
+    fun navToQuizQuestion(numQuestion: Int, numCorrect: Int, question:String) {
         val fragment = QuizQuestionFragment().apply {
             arguments = bundleOf(
                 "NUM_QUESTION" to numQuestion,
                 "NUM_CORRECT" to numCorrect,
-                "TOPIC" to topic)
+                "QUESTION" to question)
         }
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)

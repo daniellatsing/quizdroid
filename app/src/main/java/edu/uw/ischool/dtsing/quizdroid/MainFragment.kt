@@ -40,7 +40,8 @@ class MainFragment : Fragment() {
         val adapter = TopicListAdapter(requireContext(), topics) { topicTitle, _ ->
             val selectedTopic = topics.find { it.title == topicTitle }
             selectedTopic?.let {
-                (requireActivity() as MainActivity).navToTopicOverview(it.title, it.longDescription)
+                shortDescriptionTextView.text = it.shortDescription
+                (requireActivity() as MainActivity).navToTopicOverview(it.title, it.shortDescription)
             }
         }
         listView.adapter = adapter

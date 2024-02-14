@@ -11,15 +11,16 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 class TopicOverviewFragment : Fragment() {
+    lateinit var quizApp: QuizApp
     companion object {
         private const val ARG_TOPIC = "topic"
         private const val ARG_DESCRIPTION = "description"
 
-        fun newInstance(topic: String, longDescription: String): TopicOverviewFragment {
+        fun newInstance(topic: String, description: Any?): TopicOverviewFragment {
             val fragment = TopicOverviewFragment()
             val args = Bundle()
             args.putString(ARG_TOPIC, topic)
-            args.putString(ARG_DESCRIPTION, longDescription)
+            args.putString(ARG_DESCRIPTION, description.toString())
             fragment.arguments = args
             return fragment
         }
