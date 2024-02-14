@@ -29,7 +29,7 @@ class TopicOverviewFragment : Fragment() {
         // Retrieve topic title from arguments
         val topic = arguments?.getString(ARG_TOPIC, "") ?: ""
 
-        // Display the topic title (e.g., set it to a TextView)
+        // Display the topic title
         val topicTextView = view.findViewById<TextView>(R.id.topicTextView)
         topicTextView.text = topic
 

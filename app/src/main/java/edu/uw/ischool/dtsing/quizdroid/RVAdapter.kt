@@ -5,18 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlin.reflect.KFunction0
 
-class RVAdapter(private val data: List<String>, private var listener: (String) -> Unit) :
+class RVAdapter(private val data: List<Topic?>, private val listener: (String) -> Unit) :
     RecyclerView.Adapter<RVAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textView: TextView = itemView.findViewById(R.id.quizTopic)
 
-        fun bindItem(item: String) {
-            textView.text = item
+        fun bindItem(topic: Topic) {
+            textView.text = topic.title
             itemView.setOnClickListener {
-                listener(item)
+                listener(topic.title)
             }
         }
     }
@@ -28,7 +27,7 @@ class RVAdapter(private val data: List<String>, private var listener: (String) -
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(data[position])
+        data[position]?.let { holder.bindItem(it) }
     }
 
     override fun getItemCount(): Int {

@@ -2,7 +2,7 @@
     <string name="app_name">QuizDroid</string>
     <string name="choose_a_topic">Choose a topic:</string>
     <string name="quiz_topic">Quiz Topic</string>
-    <string name="questions">## Questions</string>
+    <string name="questions">5 Questions</string>
     <string name="lorem_ipsum_dolor_sit_amet">Lorem ipsum dolor sit amet</string>
     <string name="topic">Topic</string>
     <string name="begin">Begin</string>
