@@ -1,5 +1,6 @@
 package edu.uw.ischool.dtsing.quizdroid
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,115 +11,81 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 
+private const val ARG_TOPIC = "topic"
+private const val ARG_CURRENT_QUESTION = "currentQuestionNumber"
+
 class QuizQuestionFragment : Fragment() {
+    private var topic: String? = null
+    private var currentQuestionNumber: Int? = null
+    private lateinit var topicRepository: TopicRepository
+    private var topicObject: Topic? = null
     private lateinit var submitBtn: Button
     private lateinit var backBtn: Button
-    private lateinit var radioGroupAnswers: RadioGroup
-    private var questionList: List<Question>? = null
-    private var topics : List<Topic>? = null
-    private var currentQuestionNumber: Int = 0
-    private var numCorrect : Int = 0
+    private lateinit var radioGroup: RadioGroup
 
-    private fun handleOptionClick(selectedOption: Int) {
-
-        // Check if questionList is not null
-        val questionList = questionList ?: return
-
-        // Ensure currentQuestionNumber is valid
-        if (currentQuestionNumber < 0 || currentQuestionNumber >= questionList.size) {
-            // Invalid current question number
-            return
-        }
-
-        // Get the current question
-        val currentQuestion = questionList[currentQuestionNumber]
-        // Check if the selected option matches the correct answer
-        if (selectedOption == currentQuestion.correctAnswer) {
-            numCorrect++
-
+    companion object {
+        fun newInstance(topic: String, currentQuestionNumber: Int): QuizQuestionFragment {
+            val fragment = QuizQuestionFragment()
+            val args = Bundle().apply {
+                putString(ARG_TOPIC, topic)
+                putInt(ARG_CURRENT_QUESTION, currentQuestionNumber)
+            }
+            fragment.arguments = args
+            return fragment
         }
     }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_quiz_question, container, false)
 
-        arguments?.let { args ->
-            questionList = args.getParcelableArrayList("QUESTION_LIST")
-            currentQuestionNumber = args.getInt("CURRENT_QUESTION_NUMBER", 0)
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        // Display current question
-        questionList?.let { questions ->
-            val currentQuestion = questions[currentQuestionNumber]
-            val questionTextView = view.findViewById<TextView>(R.id.questionTextView)
-            val option1TextView = view.findViewById<TextView>(R.id.radioButton)
-            val option2TextView = view.findViewById<TextView>(R.id.radioButton2)
-            val option3TextView = view.findViewById<TextView>(R.id.radioButton3)
-            val option4TextView = view.findViewById<TextView>(R.id.radioButton4)
+        topicRepository = TopicRepository()
 
-            questionTextView.text = currentQuestion.questionText
-            option1TextView.text = currentQuestion.a1
-            option2TextView.text = currentQuestion.a2
-            option3TextView.text = currentQuestion.a3
-            option4TextView.text = currentQuestion.a4
-
-            // Set click listeners for options
-            option1TextView.setOnClickListener { handleOptionClick(1) }
-            option2TextView.setOnClickListener { handleOptionClick(2) }
-            option3TextView.setOnClickListener { handleOptionClick(3) }
-            option4TextView.setOnClickListener { handleOptionClick(4) }
-        }
-
-        // Define the onBackPressedCallback outside of the lambda
-        val onBackPressedCallback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // Check if it's the first question page
-                if (currentQuestionNumber == 1) {
-                    // Navigate back to the topic list page
-                    (requireActivity() as MainActivity).navToTopicOverview(
-                        topics.title,
-                        topics.longDescription
-                    )
-                } else {
-                    // Navigate to the previous question fragment
-                    (requireActivity() as MainActivity).navToQuizQuestion(
-                        currentQuestionNumber - 1,
-                        numCorrect,
-                        topic
-                    )
-                }
+        // Retrieve topic and description from arguments
+        arguments?.let {
+            topic = it.getString(ARG_TOPIC)
+            currentQuestionNumber = it.getInt(ARG_CURRENT_QUESTION)
+            if (topic != null) {
+                topicObject = (activity?.application as? QuizApp)?.topicRepository?.getTopic(topic!!)
+            } else {
+                Toast.makeText(requireContext(), "Topic name is null", Toast.LENGTH_SHORT).show()
+                Log.e(TAG, "Topic name is null")
             }
         }
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            onBackPressedCallback
-        )
+    }
 
-        // Get reference to buttons
-        backBtn = view.findViewById(R.id.backBtn)
-        submitBtn = view.findViewById(R.id.submitBtn)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View? {
+        val view = inflater.inflate(R.layout.fragment_quiz_question, container, false)
+
+        radioGroup = view.findViewById(R.id.radioGroup)
+
+        val question = topicObject?.questionsList?.getOrNull(currentQuestionNumber!!)
 
         // If submit button is disabled, enable once the user selects an option
-        radioGroupAnswers.setOnCheckedChangeListener { _, _ ->
+        radioGroup.setOnCheckedChangeListener { _, _ ->
             if (!submitBtn.isEnabled) {
                 submitBtn.isEnabled = true
             }
         }
 
-        // Start listening for next activity after clicking button
+        // Get reference to buttons
+        backBtn = view.findViewById(R.id.backBtn)
+        submitBtn = view.findViewById(R.id.submitBtn)
+
+        // When the user submits an answer
         submitBtn.setOnClickListener {
-            val selectRB = radioGroupAnswers.checkedRadioButtonId
+            val selectRB = radioGroup.checkedRadioButtonId
             val userAnswer = view.findViewById<RadioButton>(selectRB)?.text?.toString()
             if (userAnswer != null) {
-                // Navigate to QuizAnswerFragment with user's answer
-                (requireActivity() as MainActivity).navToQuizAnswer(
-                    userAnswer,
-                    currentQuestionNumber,
-                    numCorrect
-                )
+                if (question != null) {
+                    val mainActivity = requireActivity() as? MainActivity
+                    mainActivity?.navToQuizAnswer(
+                        userAnswer,
+                        currentQuestionNumber!!,
+                        question.correctQuestionIndex
+                    )
+                }
             } else {
                 Toast.makeText(requireContext(), "Please select an answer", Toast.LENGTH_SHORT)
                     .show()
@@ -127,13 +94,14 @@ class QuizQuestionFragment : Fragment() {
 
         // Set click listener for the back button
         backBtn.setOnClickListener {
-            if (currentQuestionNumber > 1) {
-                // Navigate to the previous question fragment
-                (requireActivity() as MainActivity).navToQuizQuestion(
-                    currentQuestionNumber - 1,
-                    numCorrect,
-                    topic
-                )
+            if (currentQuestionNumber!! > 1) {
+                if (question != null) {
+                    val mainActivity = requireActivity() as? MainActivity
+                    mainActivity?.navToQuizQuestion(
+                        topic!!,
+                        currentQuestionNumber!! - 1
+                    )
+                }
             } else {
                 // Let the user know they cannot go back further
                 Toast.makeText(
@@ -144,5 +112,36 @@ class QuizQuestionFragment : Fragment() {
             }
         }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Retrieve topic and description from arguments
+        arguments?.let {
+            topic = it.getString(ARG_TOPIC)
+            currentQuestionNumber = it.getInt(ARG_CURRENT_QUESTION)
+        }
+
+        val quizApp = activity?.application as QuizApp
+        topic?.let { topicName ->
+            topicObject = quizApp.topicRepository.getTopic(topicName)
+        }
+        val question = topicObject?.questionsList?.get(currentQuestionNumber!!)
+        if (question != null) {
+            getQAViews(question)
+        } else {
+            Toast.makeText(requireContext(), "Failed to retrieve question", Toast.LENGTH_SHORT).show()
+            Log.e(TAG, "Failed to retrieve question: question is null")
+        }
+    }
+
+    private fun getQAViews(question: Question) {
+        view?.findViewById<TextView>(R.id.questionTextView)?.text = question.questionText
+
+        view?.findViewById<RadioButton>(R.id.radioButton)?.text = question.answers[0]
+        view?.findViewById<RadioButton>(R.id.radioButton2)?.text = question.answers[1]
+        view?.findViewById<RadioButton>(R.id.radioButton3)?.text = question.answers[2]
+        view?.findViewById<RadioButton>(R.id.radioButton4)?.text = question.answers[3]
     }
 }

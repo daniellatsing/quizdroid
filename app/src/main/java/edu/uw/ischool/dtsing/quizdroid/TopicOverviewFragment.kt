@@ -11,28 +11,36 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 class TopicOverviewFragment : Fragment() {
-    lateinit var quizApp: QuizApp
+    private var topic: String? = null
+    private var description: String? = null
+
     companion object {
-        private const val ARG_TOPIC = "topic"
+        const val ARG_TOPIC = "topic"
         private const val ARG_DESCRIPTION = "description"
 
-        fun newInstance(topic: String, description: Any?): TopicOverviewFragment {
+        fun newInstance(topic: String, description: String): TopicOverviewFragment {
             val fragment = TopicOverviewFragment()
-            val args = Bundle()
-            args.putString(ARG_TOPIC, topic)
-            args.putString(ARG_DESCRIPTION, description.toString())
+            val args = Bundle().apply {
+                putString(ARG_TOPIC, topic)
+                putString(ARG_DESCRIPTION, description)
+            }
             fragment.arguments = args
             return fragment
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_topic_overview, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        // Retrieve topic title from arguments
-        val topic = arguments?.getString(ARG_TOPIC, "") ?: ""
-        val description = arguments?.getString(ARG_DESCRIPTION, "") ?: ""
+        // Retrieve topic and description from arguments
+        arguments?.let {
+            topic = it.getString(ARG_TOPIC)
+            description = it.getString(ARG_DESCRIPTION)
+        }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_topic_overview, container, false)
 
         // Display the topic title and description
         val topicTextView = view.findViewById<TextView>(R.id.topicTextView)
@@ -41,7 +49,6 @@ class TopicOverviewFragment : Fragment() {
         val descTextView = view.findViewById<TextView>(R.id.topicDescriptionTextView)
         descTextView.text = description
 
-
         // Reference button
         val beginQuizBtn = view.findViewById<Button>(R.id.beginQuizBtn)
         val backBtn = view.findViewById<Button>(R.id.backBtn)
@@ -49,13 +56,17 @@ class TopicOverviewFragment : Fragment() {
         // Listen for click events on button
         beginQuizBtn.setOnClickListener{
             // When the button is clicked, navigate to QuizQuestionFragment
-            (requireActivity() as MainActivity).navToQuizQuestion(1, 0, topic)
+            topic?.let { topicName ->
+                (requireActivity() as? MainActivity)?.navToQuizQuestion(topicName, 0)
+            }
+
             Log.i("Button message", "Begin button pressed")
         }
 
         backBtn.setOnClickListener{
             // When the button is clicked, navigate to list of topics
             val intent = Intent(requireContext(), MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
             Log.i("Button message", "Back button pressed")
         }
