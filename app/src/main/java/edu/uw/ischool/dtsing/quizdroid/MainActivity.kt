@@ -21,12 +21,6 @@ class MainActivity : AppCompatActivity() {
 
     // Function to navigate to QuizQuestionFragment
     fun navToQuizQuestion(topic: String, currentQuestionNumber: Int) {
-//        val fragment = QuizQuestionFragment().apply {
-//            arguments = bundleOf(
-//                "ARG_TOPIC" to topic,
-//                "ARG_CURRENT_QUESTION" to currentQuestionNumber
-//            )
-//        }
         val fragment = QuizQuestionFragment.newInstance(topic, currentQuestionNumber)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)

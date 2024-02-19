@@ -10,46 +10,64 @@
         android:id="@+id/layoutAnswerKey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80sp"
+        android:layout_marginTop="40sp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="40dp"
         app:layout_constraintBottom_toTopOf="@+id/quizScore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/userAnswerString"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/you_answered" />
+            android:text="@string/you_answered"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constrainedWidth="true" />
 
         <TextView
             android:id="@+id/userAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/correctAnswer"
-            android:text="@string/answer" />
+            android:text="@string/answer"
+            android:layout_alignBaseline="@id/userAnswerString"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/userAnswerString"
+            app:layout_constrainedWidth="true" />
 
         <TextView
             android:id="@+id/correctAnswerString"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/correct_answer"
+            android:layout_alignParentStart="true"
             android:layout_below="@id/userAnswerString"
-            android:text="@string/correct_answer" />
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constrainedWidth="true" />
 
         <TextView
             android:id="@+id/correctAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/userAnswer"
+            android:text="@string/correct_answer_option"
+            android:layout_alignBaseline="@id/correctAnswerString"
             android:layout_toEndOf="@id/correctAnswerString"
-            android:layout_marginStart="10sp"
-            android:text="@string/correct_answer_option" />
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            app:layout_constrainedWidth="true" />
+
     </RelativeLayout>
 
     <TextView
         android:id="@+id/quizScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:text="@string/you_have_x_out_of_x_correct"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

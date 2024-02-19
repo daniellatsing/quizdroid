@@ -69,18 +69,18 @@ class TopicRepository : TopicRepositoryDb {
             Question(
                 "What is 2 + 2?",
                 listOf("3", "4", "5", "6"),
-                2
+                1
             ),
             Question (
                 "Bill is ten years older than his sister. If Bill was twenty-five" +
                         " years of age in 1983, in what year could he have been born?",
                 listOf("1948", "1953", "1958", "1963"),
-                3
+                2
             ),
             Question(
                 "What is the approximate value of the square root of 1596?",
                 listOf("10", "20", "30", "40"),
-                4
+                3
             ),
             Question(
                 "If x is a positive integer in the equation 12x = q, then q must be..?",
@@ -90,7 +90,7 @@ class TopicRepository : TopicRepositoryDb {
                     "a negative odd integer",
                     "a positive odd integer"
                 ),
-                1
+                0
             ),
             Question(
                 "What does Lagrange's theorem state?",
@@ -100,7 +100,7 @@ class TopicRepository : TopicRepositoryDb {
                     "The order of a group must divide the order of its subgroup",
                     "The order of a subgroup is always greater than the order of the group"
                 ),
-                2
+                1
             )
         )
     }
@@ -110,12 +110,12 @@ class TopicRepository : TopicRepositoryDb {
             Question(
                 "What is the SI unit of force?",
                 listOf("Joule", "Newton", "Watt", "Kilogram"),
-                2
+                1
             ),
             Question(
                 "Which of the following is a scalar quantity?",
                 listOf("Velocity", "Acceleration", "Force", "Distance"),
-                4
+                3
             ),
             Question(
                 "What is the law stating that an object at rest will remain at rest, " +
@@ -127,7 +127,7 @@ class TopicRepository : TopicRepositoryDb {
                     "Newton's Third Law of Motion",
                     "Law of Universal Gravitation"
                 ),
-                1
+                0
             ),
             Question(
                 "What type of energy is associated with the motion of an object?",
@@ -137,12 +137,12 @@ class TopicRepository : TopicRepositoryDb {
                     "Thermal energy",
                     "Chemical energy"
                 ),
-                2
+                1
             ),
             Question(
                 "What is the SI unit of Power?",
                 listOf("Watt", "Joule", "Newton", "Kilogram"),
-                1
+                0
             )
         )
     }
@@ -152,7 +152,7 @@ class TopicRepository : TopicRepositoryDb {
             Question(
                 "What is the basic unit of life?",
                 listOf("Cell", "Atom", "Molecule", "Tissue"),
-                1
+                0
             ),
             Question(
                 "Which organelle is known as the powerhouse of the cell?",
@@ -162,7 +162,7 @@ class TopicRepository : TopicRepositoryDb {
                     "Mitochondrion",
                     "Endoplasmic reticulum"
                 ),
-                3
+                2
             ),
             Question(
                 "During glycogenolysis, glycogen is broken down into:",
@@ -172,7 +172,7 @@ class TopicRepository : TopicRepositoryDb {
                     "Glucose-6-phosphate and ATP",
                     "Glucose-1-phosphate and NADH"
                 ),
-                3
+                2
             ),
             Question(
                 "What is the process by which green plants make their food?",
@@ -182,7 +182,7 @@ class TopicRepository : TopicRepositoryDb {
                     "Transpiration",
                     "Fermentation"
                 ),
-                2
+                1
             ),
             Question(
                 "Which of the following is NOT a function of the cell membrane?",
@@ -192,7 +192,7 @@ class TopicRepository : TopicRepositoryDb {
                     "Facilitating cell communication",
                     "Synthesizing proteins"
                 ),
-                4
+                3
             )
         )
     }
@@ -202,28 +202,28 @@ class TopicRepository : TopicRepositoryDb {
             Question(
                 "Which Pokemon type is super effective against Grass-type Pokemon?",
                 listOf("Fire", "Water", "Electric", "Flying"),
-                1
+                0
             ),
             Question(
                 "What is the evolved form of Pikachu?",
                 listOf("Raichu", "Pichu", "Jolteon", "Electabuzz"),
-                1
+                0
             ),
             Question(
                 "Which Pokemon is known as the 'Seed Pokemon'?",
                 listOf("Bulbasaur", "Chikorita", "Celebi", "Treecko"),
-                1
+                0
             ),
             Question(
                 "What type of Pokemon is Charizard?",
                 listOf("Fire/Flying", "Fire/Dragon", "Fire", "Dragon/Flying"),
-                1
+                0
             ),
             Question(
                 "Which Pokemon is known as the 'Water-type starter Pokemon' in the " +
                         "Kanto region?",
                 listOf("Squirtle", "Totodile", "Mudkip", "Piplup"),
-                1
+                0
             ),
         )
     }
@@ -239,30 +239,30 @@ class TopicRepository : TopicRepositoryDb {
                     "Summoner's Rift",
                     "The Howling Abyss"
                 ),
-                3
+                2
             ),
             Question(
                 "Which of the following is not a primary resource used by champions " +
                         "in League of Legends?",
                 listOf("Mana", "Energy", "Fury", "Health"),
-                4
+                3
             ),
             Question(
                 "Who is the ruler of Demacia in the lore of League of Legends?",
                 listOf("Jarvan III", "Garen Crownguard", "Luxanna Crownguard", "Sylas"),
-                1
+                0
             ),
             Question(
                 "Which champion was a member of the Kinkou Order before breaking " +
                         "away to pursue their own path?",
                 listOf("Akali", "Shen", "Zed", "Kennen"),
-                3
+                2
             ),
             Question(
                 "Which champion is associated with the Shadow Isles and seeks to " +
                         "undo the curse that afflicts their homeland?",
                 listOf("Thresh", "Kalista", "Yorick", "Maokai"),
-                3
+                2
             ),
         )
     }

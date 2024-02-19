@@ -11,17 +11,17 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 class TopicOverviewFragment : Fragment() {
-    private var topic: String? = null
+    private var topicName: String? = null
     private var description: String? = null
 
     companion object {
-        const val ARG_TOPIC = "topic"
+        const val ARG_TOPIC_NAME = "topicName"
         private const val ARG_DESCRIPTION = "description"
 
-        fun newInstance(topic: String, description: String): TopicOverviewFragment {
+        fun newInstance(topicName: String, description: String): TopicOverviewFragment {
             val fragment = TopicOverviewFragment()
             val args = Bundle().apply {
-                putString(ARG_TOPIC, topic)
+                putString(ARG_TOPIC_NAME, topicName)
                 putString(ARG_DESCRIPTION, description)
             }
             fragment.arguments = args
@@ -34,7 +34,7 @@ class TopicOverviewFragment : Fragment() {
 
         // Retrieve topic and description from arguments
         arguments?.let {
-            topic = it.getString(ARG_TOPIC)
+            topicName = it.getString(ARG_TOPIC_NAME)
             description = it.getString(ARG_DESCRIPTION)
         }
     }
@@ -44,7 +44,7 @@ class TopicOverviewFragment : Fragment() {
 
         // Display the topic title and description
         val topicTextView = view.findViewById<TextView>(R.id.topicTextView)
-        topicTextView.text = topic
+        topicTextView.text = topicName
 
         val descTextView = view.findViewById<TextView>(R.id.topicDescriptionTextView)
         descTextView.text = description
@@ -56,7 +56,7 @@ class TopicOverviewFragment : Fragment() {
         // Listen for click events on button
         beginQuizBtn.setOnClickListener{
             // When the button is clicked, navigate to QuizQuestionFragment
-            topic?.let { topicName ->
+            topicName?.let { topicName ->
                 (requireActivity() as? MainActivity)?.navToQuizQuestion(topicName, 0)
             }
 

@@ -13,11 +13,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 
-private const val ARG_TOPIC = "topic"
+private const val ARG_TOPIC_NAME = "topicName"
 private const val ARG_CURRENT_QUESTION = "currentQuestionNumber"
 
 class QuizQuestionFragment : Fragment() {
-    private var topic: String? = null
+    private var topicName: String? = null
     private var currentQuestionNumber: Int? = null
     private lateinit var topicRepository: TopicRepository
     private var topicObject: Topic? = null
@@ -26,10 +26,10 @@ class QuizQuestionFragment : Fragment() {
     private lateinit var radioGroup: RadioGroup
 
     companion object {
-        fun newInstance(topic: String, currentQuestionNumber: Int): QuizQuestionFragment {
+        fun newInstance(topicName: String, currentQuestionNumber: Int): QuizQuestionFragment {
             val fragment = QuizQuestionFragment()
             val args = Bundle().apply {
-                putString(ARG_TOPIC, topic)
+                putString(ARG_TOPIC_NAME, topicName)
                 putInt(ARG_CURRENT_QUESTION, currentQuestionNumber)
             }
             fragment.arguments = args
@@ -44,10 +44,10 @@ class QuizQuestionFragment : Fragment() {
 
         // Retrieve topic and description from arguments
         arguments?.let {
-            topic = it.getString(ARG_TOPIC)
+            topicName = it.getString(ARG_TOPIC_NAME)
             currentQuestionNumber = it.getInt(ARG_CURRENT_QUESTION)
-            if (topic != null) {
-                topicObject = (activity?.application as? QuizApp)?.topicRepository?.getTopic(topic!!)
+            if (topicName != null) {
+                topicObject = (activity?.application as? QuizApp)?.topicRepository?.getTopic(topicName!!)
             } else {
                 Toast.makeText(requireContext(), "Topic name is null", Toast.LENGTH_SHORT).show()
                 Log.e(TAG, "Topic name is null")
@@ -79,12 +79,17 @@ class QuizQuestionFragment : Fragment() {
             val userAnswer = view.findViewById<RadioButton>(selectRB)?.text?.toString()
             if (userAnswer != null) {
                 if (question != null) {
-                    val mainActivity = requireActivity() as? MainActivity
-                    mainActivity?.navToQuizAnswer(
-                        userAnswer,
+                    val quizAnswerFragment = QuizAnswerFragment.newInstance(
+                        topicName!!,
                         currentQuestionNumber!!,
+                        radioGroup.indexOfChild(view.findViewById(selectRB)),
                         question.correctQuestionIndex
                     )
+                    // Navigate to QuizAnswerFragment
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, quizAnswerFragment)
+                        .addToBackStack(null)
+                        .commit()
                 }
             } else {
                 Toast.makeText(requireContext(), "Please select an answer", Toast.LENGTH_SHORT)
@@ -98,7 +103,7 @@ class QuizQuestionFragment : Fragment() {
                 if (question != null) {
                     val mainActivity = requireActivity() as? MainActivity
                     mainActivity?.navToQuizQuestion(
-                        topic!!,
+                        topicName!!,
                         currentQuestionNumber!! - 1
                     )
                 }
@@ -119,12 +124,12 @@ class QuizQuestionFragment : Fragment() {
 
         // Retrieve topic and description from arguments
         arguments?.let {
-            topic = it.getString(ARG_TOPIC)
+            topicName = it.getString(ARG_TOPIC_NAME)
             currentQuestionNumber = it.getInt(ARG_CURRENT_QUESTION)
         }
 
         val quizApp = activity?.application as QuizApp
-        topic?.let { topicName ->
+        topicName?.let { topicName ->
             topicObject = quizApp.topicRepository.getTopic(topicName)
         }
         val question = topicObject?.questionsList?.get(currentQuestionNumber!!)
