@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 
 class MainActivity : AppCompatActivity() {
 
+    var numCorrectAnswers: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

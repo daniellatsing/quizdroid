@@ -92,6 +92,12 @@ class QuizAnswerFragment : Fragment() {
         // Set quiz score text
         view.findViewById<TextView>(R.id.quizScore).text = getString(R.string.quiz_score, numCorrectAnswers)
 
+        if (question != null) {
+            if (userAnswer == question.correctQuestionIndex) {
+                (activity as? MainActivity)?.numCorrectAnswers = (activity as? MainActivity)?.numCorrectAnswers!! + 1
+            }
+        }
+
         // Differentiate between next and finished to decide what button will show up
         val quizStatus = if ((currentQuestionNumber!!) < 4) "Next" else "Finish"
 

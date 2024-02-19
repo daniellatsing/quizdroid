@@ -77,21 +77,24 @@ class QuizQuestionFragment : Fragment() {
         // When the user submits an answer
         submitBtn.setOnClickListener {
             val selectRB = radioGroup.checkedRadioButtonId
+            val userAnswerIndex = radioGroup.indexOfChild(view.findViewById(selectRB))
             val userAnswer = view.findViewById<RadioButton>(selectRB)?.text?.toString()
-            if (userAnswer != null) {
-                if (question != null) {
-                    val correctAnswer = question.answers[question.correctQuestionIndex]
-                    if (userAnswer == correctAnswer) {
-                        numCorrectAnswers++
-                    }
-                    val quizAnswerFragment = QuizAnswerFragment.newInstance(
+
+            if (userAnswerIndex != -1) { // Ensure a valid answer is selected
+                val correctAnswer = question?.answers?.get(question.correctQuestionIndex)
+                if (userAnswer == correctAnswer) {
+                    numCorrectAnswers++ // Increment if answer is correct
+                }
+                val quizAnswerFragment = question?.let { it1 ->
+                    QuizAnswerFragment.newInstance(
                         topicName!!,
                         currentQuestionNumber!!,
-                        radioGroup.indexOfChild(view.findViewById(selectRB)),
-                        question.correctQuestionIndex,
+                        userAnswerIndex, // Pass user's answer index to QuizAnswerFragment
+                        it1.correctQuestionIndex,
                         numCorrectAnswers
                     )
-                    // Navigate to QuizAnswerFragment
+                }
+                if (quizAnswerFragment != null) {
                     requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, quizAnswerFragment)
                         .addToBackStack(null)
@@ -105,7 +108,7 @@ class QuizQuestionFragment : Fragment() {
 
         // Set click listener for the back button
         backBtn.setOnClickListener {
-            if (currentQuestionNumber!! > 1) {
+            if (currentQuestionNumber!! > 0) {
                 if (question != null) {
                     val mainActivity = requireActivity() as? MainActivity
                     mainActivity?.navToQuizQuestion(
@@ -154,5 +157,28 @@ class QuizQuestionFragment : Fragment() {
         view?.findViewById<RadioButton>(R.id.radioButton2)?.text = question.answers[1]
         view?.findViewById<RadioButton>(R.id.radioButton3)?.text = question.answers[2]
         view?.findViewById<RadioButton>(R.id.radioButton4)?.text = question.answers[3]
+
+        backBtn.setOnClickListener {
+            if (currentQuestionNumber!! > 0) {
+                // Check if the previous answer was correct and decrement numCorrectAnswers if necessary
+                val previousAnswerIndex = radioGroup.indexOfChild(view?.findViewById(radioGroup.checkedRadioButtonId))
+                if (previousAnswerIndex == question.correctQuestionIndex) {
+                    (activity as? MainActivity)?.numCorrectAnswers = (activity as? MainActivity)?.numCorrectAnswers!! - 1
+                }
+
+                val mainActivity = requireActivity() as? MainActivity
+                mainActivity?.navToQuizQuestion(
+                    topicName!!,
+                    currentQuestionNumber!! - 1
+                )
+            } else {
+                // Let the user know they cannot go back further
+                Toast.makeText(
+                    requireContext(),
+                    "There are no more previous questions.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 }
