@@ -10,12 +10,12 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 
 private const val ARG_TOPIC_NAME = "topicName"
 private const val ARG_CURRENT_QUESTION = "currentQuestionNumber"
 private const val ARG_USER_ANSWER = "userAnswer"
 private const val ARG_CORRECT_INDEX = "correctQuestionIndex"
+private const val ARG_NUM_CORRECT_ANSWERS = "numCorrectAnswers"
 
 class QuizAnswerFragment : Fragment() {
     private lateinit var nextBtn: Button
@@ -26,15 +26,23 @@ class QuizAnswerFragment : Fragment() {
     private var currentQuestionNumber: Int? = null
     private var userAnswer: Int? = null
     private var correctQuestionIndex: Int? = null
+    private var numCorrectAnswers: Int = 0
 
     companion object {
-        fun newInstance(topicName: String, currentQuestionNumber: Int, userAnswer: Int, correctQuestionIndex: Int): QuizAnswerFragment {
+        fun newInstance(
+            topicName: String,
+            currentQuestionNumber: Int,
+            userAnswer: Int,
+            correctQuestionIndex: Int,
+            numCorrectAnswers: Int
+        ): QuizAnswerFragment {
             val fragment = QuizAnswerFragment()
             val args = Bundle().apply {
                 putString(ARG_TOPIC_NAME, topicName)
                 putInt(ARG_CURRENT_QUESTION, currentQuestionNumber)
                 putInt(ARG_USER_ANSWER, userAnswer)
                 putInt(ARG_CORRECT_INDEX, correctQuestionIndex)
+                putInt(ARG_NUM_CORRECT_ANSWERS, numCorrectAnswers)
             }
             fragment.arguments = args
             return fragment
@@ -51,6 +59,7 @@ class QuizAnswerFragment : Fragment() {
             currentQuestionNumber = it.getInt(ARG_CURRENT_QUESTION)
             userAnswer = it.getInt(ARG_USER_ANSWER)
             correctQuestionIndex = it.getInt(ARG_CORRECT_INDEX)
+            numCorrectAnswers = it.getInt(ARG_NUM_CORRECT_ANSWERS)
 
             if (topicName != null) {
                 topicObject =  topicRepository.getTopic(topicName!!)
@@ -81,7 +90,7 @@ class QuizAnswerFragment : Fragment() {
         }
 
         // Set quiz score text
-        view.findViewById<TextView>(R.id.quizScore).text = getString(R.string.quiz_score, correctQuestionIndex)
+        view.findViewById<TextView>(R.id.quizScore).text = getString(R.string.quiz_score, numCorrectAnswers)
 
         // Differentiate between next and finished to decide what button will show up
         val quizStatus = if ((currentQuestionNumber!!) < 4) "Next" else "Finish"

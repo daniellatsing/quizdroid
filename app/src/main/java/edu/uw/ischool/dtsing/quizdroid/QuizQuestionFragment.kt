@@ -24,6 +24,7 @@ class QuizQuestionFragment : Fragment() {
     private lateinit var submitBtn: Button
     private lateinit var backBtn: Button
     private lateinit var radioGroup: RadioGroup
+    private var numCorrectAnswers: Int = 0
 
     companion object {
         fun newInstance(topicName: String, currentQuestionNumber: Int): QuizQuestionFragment {
@@ -79,11 +80,16 @@ class QuizQuestionFragment : Fragment() {
             val userAnswer = view.findViewById<RadioButton>(selectRB)?.text?.toString()
             if (userAnswer != null) {
                 if (question != null) {
+                    val correctAnswer = question.answers[question.correctQuestionIndex]
+                    if (userAnswer == correctAnswer) {
+                        numCorrectAnswers++
+                    }
                     val quizAnswerFragment = QuizAnswerFragment.newInstance(
                         topicName!!,
                         currentQuestionNumber!!,
                         radioGroup.indexOfChild(view.findViewById(selectRB)),
-                        question.correctQuestionIndex
+                        question.correctQuestionIndex,
+                        numCorrectAnswers
                     )
                     // Navigate to QuizAnswerFragment
                     requireActivity().supportFragmentManager.beginTransaction()
