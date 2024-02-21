@@ -23,4 +23,13 @@
     <string name="back">Back</string>
     <string name="short_description">Short Description</string>
     <string name="userAnswer" />
+    <string name="preferences">Preferences</string>
+    <string name="minutes_between_messages">Minutes Between Messages:</string>
+    <string name="start">Start</string>
+    <string name="message">Message:</string>
+    <string name="phone_number">Phone Number:</string>
+    <string name="update_preferences">Update Preferences</string>
+    <string name="data_url">Data URL:</string>
+    <string name="check_for_new_downloads_every">Check for new downloads every:</string>
+    <string name="minutes">minutes</string>
 </resources>

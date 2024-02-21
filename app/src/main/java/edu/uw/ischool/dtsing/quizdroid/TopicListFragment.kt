@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import java.io.File
 
 class TopicListFragment : Fragment() {
     private lateinit var topicListView: ListView
@@ -16,7 +17,10 @@ class TopicListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_topic_list, container, false)
         topicListView = view.findViewById(R.id.topicListView)
 
-        topicRepository = TopicRepository()
+        val jsonFile = File(requireContext().filesDir, "dtsing_custom_questions.json")
+        topicRepository = TopicRepository(jsonFile)
+
+        // topicRepository = TopicRepository()
         val topics = topicRepository.getAllTopics()
 
         val adapter = TopicListAdapter(requireContext(), topics)
