@@ -32,4 +32,6 @@
     <string name="data_url">Data URL:</string>
     <string name="check_for_new_downloads_every">Check for new downloads every:</string>
     <string name="minutes">minutes</string>
+    <string name="insert_data_url_here">Insert Data URL here</string>
+    <string name="insert_minutes">Insert minutes</string>
 </resources>

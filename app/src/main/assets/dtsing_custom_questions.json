@@ -1,0 +1,307 @@
+[
+  { "title":"Math",
+    "desc":"The science and study of quality, structure, space, and change.",
+    "questions": [
+      {
+        "text":"What is 2 + 2?",
+        "answer":"1",
+        "answers":[
+          "3",
+          "4",
+          "5",
+          "6"
+        ]
+      },
+      {
+        "text": "Bill is ten years older than his sister. If Bill was twenty-five years of age in 1983, in what year could he have been born?",
+        "answer": "3",
+        "answers":[
+          "1948",
+          "1953",
+          "1958",
+          "1963"
+        ]
+      },
+      {
+        "text": "What is the approximate value of the square root of 1596?",
+        "answer": "3",
+        "answers": [
+          "10",
+          "20",
+          "30",
+          "40"
+        ]
+      },
+      {
+        "text": "If x is a positive integer in the equation 12x = q, then q must be..?",
+        "answer": "0",
+        "answers": [
+          "a positive even integer",
+          "a negative even integer",
+          "a negative odd integer",
+          "a positive odd integer"
+        ]
+      },
+      {
+        "text": "What does Lagrange's theorem state?",
+        "answer": "1",
+        "answers": [
+          "Every group is cyclic",
+          "The order of a subgroup must divide the order of the group",
+          "The order of a group must divide the order of its subgroup",
+          "The order of a subgroup is always greater than the order of the group"
+        ]
+      }
+    ]
+  },
+  { "title":"Physics",
+    "desc": "The scientific study of the behavior of matter, energy, and force.",
+    "questions":[
+      {
+        "text":"What is the SI unit of force?",
+        "answer":"1",
+        "answers":[
+          "Joule",
+          "Newton",
+          "Watt",
+          "Kilogram"
+        ]
+      },
+      {
+        "text":"Which of the following is a scalar quantity?",
+        "answer":"3",
+        "answers":[
+          "Velocity",
+          "Acceleration",
+          "Force",
+          "Distance"
+        ]
+      },
+      {
+        "text":"What is the law stating that an object at rest will remain at rest, and an object in motion will remain in motion with constant velocity unless acted upon by a net external force?",
+        "answer":"0",
+        "answers":[
+          "Newton's First Law of Motion",
+          "Newton's Second Law of Motion",
+          "Newton's Third Law of Motion",
+          "Law of Universal Gravitation"
+        ]
+      },
+      {
+        "text": "What type of energy is associated with the motion of an object?",
+        "answer": "1",
+        "answers": [
+          "Potential energy",
+          "Kinetic energy",
+          "Thermal energy",
+          "Chemical energy"
+        ]
+      },
+      {
+        "text": "What is the SI unit of Power?",
+        "answer": "1",
+        "answers": [
+          "Watt",
+          "Joule",
+          "Newton",
+          "Kilogram"
+        ]
+      }
+    ]
+  },
+  { "title":"Biology",
+    "desc":"A branch of science study of life and living organisms.",
+    "questions":[
+      {
+        "text":"What is the basic unit of life?",
+        "answer":"0",
+        "answers":[
+          "Cell",
+          "Atom",
+          "Molecule",
+          "Tissue"
+        ]
+      },
+      {
+        "text":"Which organelle is known as the powerhouse of the cell?",
+        "answer":"2",
+        "answers":[
+          "Nucleus",
+          "Golgi Apparatus",
+          "Mitochondrion",
+          "Endoplasmic reticulum"
+        ]
+      },
+      {
+        "text":"Which organelle is known as the powerhouse of the cell?",
+        "answer":"2",
+        "answers":[
+          "Nucleus",
+          "Golgi Apparatus",
+          "Mitochondrion",
+          "Endoplasmic reticulum"
+        ]
+      },
+      {
+        "text":"Which organelle is known as the powerhouse of the cell?",
+        "answer":"2",
+        "answers":[
+          "Nucleus",
+          "Golgi Apparatus",
+          "Mitochondrion",
+          "Endoplasmic reticulum"
+        ]
+      },
+      {
+        "text":"Which organelle is known as the powerhouse of the cell?",
+        "answer":"2",
+        "answers":[
+          "Nucleus",
+          "Golgi Apparatus",
+          "Mitochondrion",
+          "Endoplasmic reticulum"
+        ]
+      },
+      {
+        "text":"During glycogenolysis, glycogen is broken down into:",
+        "answer":"2",
+        "answers":[
+          "Glucose-1-phosphate and ATP",
+          "Glucose-6-phosphate and NADH",
+          "Glucose-6-phosphate and ATP",
+          "Glucose-1-phosphate and NADH"
+        ]
+      },
+      {
+        "text":"What is the process by which green plants make their food?",
+        "answer":"1",
+        "answers":[
+          "Respiration",
+          "Photosynthesis",
+          "Transpiration",
+          "Fermentation"
+        ]
+      },
+      {
+        "text":"Which of the following is NOT a function of the cell membrane?",
+        "answer":"3",
+        "answers":[
+          "Regulating the passage of substances into and out of the cell",
+          "Providing structural support to the cell",
+          "Facilitating cell communication",
+          "Synthesizing proteins"
+        ]
+      }
+    ]
+  },
+  { "title":"Pokemon",
+    "desc":"A popular franchise that originated from a series of video games developed by Nintendo.",
+    "questions":[
+      {
+        "text":"Which Pokemon type is super effective against Grass-type Pokemon?",
+        "answer":"0",
+        "answers":[
+          "Fire",
+          "Water",
+          "Electric",
+          "Flying"
+        ]
+      },
+      {
+        "text":"What is the evolved form of Pikachu?",
+        "answer":"0",
+        "answers":[
+          "Raichu",
+          "Pichu",
+          "Jolteon",
+          "Electabuzz"
+        ]
+      },
+      {
+        "text":"Which Pokemon is known as the 'Seed Pokemon'",
+        "answer":"0",
+        "answers":[
+          "Bulbasaur",
+          "Chikorita",
+          "Celebi",
+          "Treecko"
+        ]
+      },
+      {
+        "text":"What type of Pokemon is Charizard?",
+        "answer":"0",
+        "answers":[
+          "Fire/Flying",
+          "Fire/Dragon",
+          "Fire",
+          "Dragon/Flying"
+        ]
+      },
+      {
+        "text":"Which Pokemon is known as the 'Water-type starter Pokemon' in the Kanto region?",
+        "answer":"0",
+        "answers":[
+          "Squirtle",
+          "Totodile",
+          "Mudkip",
+          "Piplup"
+        ]
+      }
+    ]
+  },
+  { "title":"League of Legends",
+    "desc":"A popular MOBA developed by Riot Games.",
+    "questions":[
+      {
+        "text":"What is the name of the main map used in most League of Legends matches?",
+        "answer":"2",
+        "answers":[
+          "Summoner's Valley",
+          "Rift Valley",
+          "Summoner's Rift",
+          "The Howling Abyss"
+        ]
+      },
+      {
+        "text":"Which of the following is not a primary resource used by champions in League of Legends?",
+        "answer":"3",
+        "answers":[
+          "Mana",
+          "Energy",
+          "Fury",
+          "Health"
+        ]
+      },
+      {
+        "text":"Who is the ruler of Demacia in the lore of League of Legends?",
+        "answer":"0",
+        "answers":[
+          "Jarvan III",
+          "Garen Crownguard",
+          "Luxanna Crownguard",
+          "Sylas"
+        ]
+      },
+      {
+        "text":"Which champion was a member of the Kinkou Order before breakingaway to pursue their own path?",
+        "answer":"2",
+        "answers":[
+          "Akali",
+          "Shen",
+          "Zed",
+          "Kennen"
+        ]
+      },
+      {
+        "text":"Which champion is associated with the Shadow Isles and seeks to undo the curse that afflicts their homeland?",
+        "answer":"2",
+        "answers":[
+          "Thresh",
+          "Kalista",
+          "Yorick",
+          "Maokai"
+        ]
+      }
+    ]
+  }
+]

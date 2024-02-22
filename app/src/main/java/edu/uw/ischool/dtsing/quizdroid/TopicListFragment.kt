@@ -20,7 +20,6 @@ class TopicListFragment : Fragment() {
         val jsonFile = File(requireContext().filesDir, "dtsing_custom_questions.json")
         topicRepository = TopicRepository(jsonFile)
 
-        // topicRepository = TopicRepository()
         val topics = topicRepository.getAllTopics()
 
         val adapter = TopicListAdapter(requireContext(), topics)

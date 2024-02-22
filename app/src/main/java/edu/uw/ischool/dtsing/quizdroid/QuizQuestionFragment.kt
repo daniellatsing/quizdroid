@@ -12,6 +12,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import java.io.File
 
 private const val ARG_TOPIC_NAME = "topicName"
 private const val ARG_CURRENT_QUESTION = "currentQuestionNumber"
@@ -41,14 +42,16 @@ class QuizQuestionFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        topicRepository = TopicRepository()
+        // topicRepository = TopicRepository()
+        val jsonFile = File(requireContext().filesDir, "dtsing_custom_questions.json")
+        topicRepository = TopicRepository(jsonFile)
 
         // Retrieve topic and description from arguments
         arguments?.let {
             topicName = it.getString(ARG_TOPIC_NAME)
             currentQuestionNumber = it.getInt(ARG_CURRENT_QUESTION)
             if (topicName != null) {
-                topicObject = (activity?.application as? QuizApp)?.topicRepository?.getTopic(topicName!!)
+                topicObject = topicRepository.getTopic(topicName!!)
             } else {
                 Toast.makeText(requireContext(), "Topic name is null", Toast.LENGTH_SHORT).show()
                 Log.e(TAG, "Topic name is null")
@@ -137,9 +140,11 @@ class QuizQuestionFragment : Fragment() {
             currentQuestionNumber = it.getInt(ARG_CURRENT_QUESTION)
         }
 
-        val quizApp = activity?.application as QuizApp
+        val jsonFile = File(requireContext().filesDir, "dtsing_custom_questions.json")
+        topicRepository = TopicRepository(jsonFile)
+
         topicName?.let { topicName ->
-            topicObject = quizApp.topicRepository.getTopic(topicName)
+            topicObject = topicRepository.getTopic(topicName)
         }
         val question = topicObject?.questionsList?.get(currentQuestionNumber!!)
         if (question != null) {

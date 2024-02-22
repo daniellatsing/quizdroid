@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import java.io.File
 
 private const val ARG_TOPIC_NAME = "topicName"
 private const val ARG_CURRENT_QUESTION = "currentQuestionNumber"
@@ -51,7 +52,8 @@ class QuizAnswerFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        topicRepository = (requireActivity().application as QuizApp).topicRepository as TopicRepository
+        val jsonFile = File(requireContext().filesDir, "dtsing_custom_questions.json")
+        topicRepository = TopicRepository(jsonFile)
 
         // Retrieve topic and description from arguments
         arguments?.let {

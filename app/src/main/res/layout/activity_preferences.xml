@@ -12,9 +12,11 @@
         android:layout_height="wrap_content"
         android:text="@string/preferences"
         android:textSize="20sp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/URLTextEdit"
@@ -31,11 +33,15 @@
         android:id="@+id/URLEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints="Insert Data URL here"
         android:ems="10"
+        android:hint="@string/insert_data_url_here"
         android:inputType="textUri"
-        app:layout_constraintStart_toEndOf="@id/URLTextEdit"
+        android:minHeight="48dp"
+        android:textColorHint="#546E7A"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/preferencesTextEdit"/>
+        app:layout_constraintStart_toEndOf="@id/URLTextEdit"
+        app:layout_constraintTop_toBottomOf="@id/preferencesTextEdit" />
 
     <TextView
         android:id="@+id/CheckDLTextView"
@@ -51,11 +57,15 @@
         android:id="@+id/minuteEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints="Interval minutes"
         android:ems="5"
+        android:hint="@string/insert_minutes"
         android:inputType="number"
-        app:layout_constraintStart_toEndOf="@id/CheckDLTextView"
+        android:minHeight="48dp"
+        android:textColorHint="#546E7A"
         app:layout_constraintEnd_toStartOf="@id/minutesTextView"
-        app:layout_constraintTop_toBottomOf="@id/URLEditText"/>
+        app:layout_constraintStart_toEndOf="@id/CheckDLTextView"
+        app:layout_constraintTop_toBottomOf="@id/URLEditText" />
 
     <TextView
         android:id="@+id/minutesTextView"
